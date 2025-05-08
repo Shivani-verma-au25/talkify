@@ -31,4 +31,12 @@ export const upStreamUser =  async(userData) =>{
 
 
 // todo : to it later
-export const genrateStreamToken = async (userID) =>{}
+export const genrateStreamToken = async (userID) =>{
+    try {
+        // ensure id  is a string
+        const userid = userID.toString()
+        return streamClient.createToken(userid)
+    } catch (error) {
+        console.log("Error genrsting Stream token " , error);
+    }
+}

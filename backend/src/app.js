@@ -16,7 +16,10 @@ app.use(cors())
 // routes imports
 import authRouter from './routers/auth.routes.js'
 import userRouter from './routers/user.routes.js'
+import chatRouter from './routers/chat.routes.js'
+
 app.use('/api/auth' ,authRouter)
 app.use('/api/user' ,userRouter)
+app.use('/api/chat' ,chatRouter)
 
 export {app}
