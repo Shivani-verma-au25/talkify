@@ -1,18 +1,33 @@
 import React, { useState } from 'react'
 import { HandMetal } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { axiosInstance } from '../utils/Axios';
+import { signup } from '../utils/api';
 
 
 
 function SignUpPage() {
+  const navigate = useNavigate() 
   const [signupData ,setSignUpData] = useState({
     fullname : '',
     email : '',
     password : '',
   });
 
+
+  const queryClient = useQueryClient();
+
+  const {mutate ,isPending ,error} = useMutation({
+    mutationFn : signup,
+
+    onSuccess : () => queryClient.invalidateQueries({queryKey : ['authUser']})  
+    })
+
   const handleSubmit = (e) => {
-    e.preventDeafault()
+    e.preventDefault();
+    // call to useMutation funct use mutate to call it
+    mutate(signupData)
   }
 
   return (
@@ -25,7 +40,12 @@ function SignUpPage() {
             <HandMetal className='w-9 h-9 text-primary' />
             <span className='text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-tighter '>Takify</span>
           </div>
-
+          {/* error message if any  */}
+          {error && (
+            <div className='alert alert-error b-4'>
+              <span>{error.response.data.message }</span>
+            </div>
+          ) }
           <div className='w-full'>
             {/* signup form */}
             <form onSubmit={handleSubmit} >
@@ -47,7 +67,8 @@ function SignUpPage() {
                     value={signupData.fullname}
                     onChange={(e) => setSignUpData({...signupData , fullname : e.target.value})}
                     required
-                    name="" id="" />
+                    name="fullname" 
+                    id="" />
                   </div>
 
                   {/* email */}
@@ -61,7 +82,8 @@ function SignUpPage() {
                     value={signupData.email}
                     onChange={(e) => setSignUpData({...signupData , email : e.target.value})}
                     required
-                    name="" id="" />
+                    name="email" 
+                    id="" />
                   </div>
 
 
@@ -76,14 +98,19 @@ function SignUpPage() {
                     value={signupData.password}
                     onChange={(e) => setSignUpData({...signupData , password : e.target.value})}
                     required
-                    name="" id="" />
+                    name="password" id="" />
 
                     <p className='text-xs opacity-70 mt-1'>Passwor must be at least 6 characters long</p>
                   </div>
                 </div>
               </div>
                 {/* button */}
-                <button className='btn btn-primary w-full my-4 ' type='submit'>Create Account </button>
+                <button className='btn btn-primary w-full my-4 ' type='submit'>{isPending ? (
+                  <>
+                  <span className='loading loading-spinner loading-xs'></span>
+                  Loading...
+                  </>
+                ) : ('Create Account') } </button>
                 <p className='text-xs'>
                   Allready have an account?{' '}
                   <Link to={'/login'} className='text-primary hover:underline'>Sign in</Link> 
@@ -99,7 +126,7 @@ function SignUpPage() {
         <div className='max-w-md p-8'>
           {/* illustration */}
           <div className='relative aspect-square max-w-sm mx-auto'>
-            <img src='./public/signuppagepic.png' alt="Language ilustrations" className='w-full h-full' />
+            {/* <img src='/signuppagepic.png' alt="Language ilustrations" className='w-full h-full' /> */}
           </div>
 
           <div className='text-center space-y-3 mt-7'>

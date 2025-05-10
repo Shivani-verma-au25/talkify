@@ -63,14 +63,15 @@ export const authSignUp = asyncHandler( async  (req ,res) => {
 
     const accessToken = await createdUser.generateAccessToken()
 
-    res.cookie('accessToken' , accessToken ,{
+
+    return res.status(201)
+    .cookie('accessToken' , accessToken ,{
         maxAge : 7 * 24 * 60 * 60 * 1000,
         httpOnly : true , // prevent xss attacks
         sameSite: "strict" ,// prevnt CSRF attacks
         secure : process.env.NODE_ENV === 'production'
     })
-
-    return res.status(201).json({
+    .json({
         seccess : true ,
         user : createdUser,
         accessToken

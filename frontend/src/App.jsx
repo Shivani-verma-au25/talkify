@@ -9,7 +9,6 @@ import ChatPage from './pages/ChatPage'
 import CallPage from './pages/CallPage'
 import  {Toaster} from 'react-hot-toast'
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import {axiosInstance} from './utils/Axios.js'
 
 function App() {
@@ -25,9 +24,9 @@ function App() {
    })
 
 
-  const authUser = data?.User;
+  const authUser = data?.user;
   
-   console.log(data,"data");
+   console.log(authUser,"authuser");
    
 
   return (
