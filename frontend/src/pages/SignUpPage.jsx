@@ -126,7 +126,7 @@ function SignUpPage() {
         <div className='max-w-md p-8'>
           {/* illustration */}
           <div className='relative aspect-square max-w-sm mx-auto'>
-            {/* <img src='/signuppagepic.png' alt="Language ilustrations" className='w-full h-full' /> */}
+            <img src='/signuppagepic.png' alt="Language ilustrations" className='w-full h-full' />
           </div>
 
           <div className='text-center space-y-3 mt-7'>
