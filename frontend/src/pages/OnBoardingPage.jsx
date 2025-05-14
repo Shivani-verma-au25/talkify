@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LoaderIcon, toast } from "react-hot-toast";
 import { completeOnboarding } from "../utils/api.js";
 import { CameraIcon, MapPin , ShipWheelIcon, ShuffleIcon } from "lucide-react";
-import { LANGUAGES } from "../../../backend/src/controller/constant/index.js";
+import { LANGUAGES } from "../index.js";
 
 function OnBoardingPage() {
   const { authUser } = useAuthUser();

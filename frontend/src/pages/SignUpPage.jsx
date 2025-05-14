@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosInstance } from '../utils/Axios';
 import { signup } from '../utils/api';
+import useSignup from '../hooks/useSignup';
 
 
 
@@ -16,18 +17,19 @@ function SignUpPage() {
   });
 
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
-  const {mutate ,isPending ,error} = useMutation({
-    mutationFn : signup,
+  // const {mutate ,isPending ,error} = useMutation({
+  //   mutationFn : signup,
+  //   onSuccess : () => queryClient.invalidateQueries({queryKey : ['authUser']})  
+  // })
 
-    onSuccess : () => queryClient.invalidateQueries({queryKey : ['authUser']})  
-    })
+  const {isPending ,signupMutate , error} = useSignup()
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // call to useMutation funct use mutate to call it
-    mutate(signupData)
+    signupMutate(signupData)
   }
 
   return (

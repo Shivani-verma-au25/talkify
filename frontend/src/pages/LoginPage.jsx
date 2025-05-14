@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { login } from "../utils/api";
 import { ShipWheelIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import useLogin from "../hooks/useLogin";
 
 const LoginPage = () => {
   const [loginData, setLogin] = useState({
@@ -11,19 +11,20 @@ const LoginPage = () => {
     password: "",
   });
 
-  const queryClient = useQueryClient();
 
-  const {
-    mutate: loginMutation,
-    isPending,
-    error,
-  } = useMutation({
-    mutationFn: login,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
-    onError : (error) => {
-      toast.error(error?.response?.data.message)
-    }
-  });
+  // const {
+  //   mutate: loginMutation,
+  //   isPending,
+  //   error,
+  // } = useMutation({
+  //   mutationFn: login,
+  //   onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
+  //   onError : (error) => {
+  //     toast.error(error?.response?.data.message)
+  //   }
+  // });
+
+  const {isPending ,loginMutation , error } = useLogin()
 
   const hanldeLoginMethod = (e) => {
     e.preventDefault();

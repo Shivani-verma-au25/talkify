@@ -10,6 +10,7 @@ import CallPage from './pages/CallPage'
 import  {Toaster} from 'react-hot-toast'
 import PageLoader from './components/PageLoader.jsx'
 import useAuthUser from './hooks/useAuthUser.js'
+import LayOut from './components/LayOut.jsx'
 
 function App() {
 // tanstack query
@@ -26,7 +27,9 @@ function App() {
     <>
     <Routes  >
       <Route path='/' element={ authenticated  && isOnboarded ? (
-        <HomePage />
+        <LayOut showSidebar = {true}>
+          <HomePage />
+        </LayOut>
       ) : (
         <Navigate to={ !authenticated ? "/login" : '/onboarding'} />
         )} />

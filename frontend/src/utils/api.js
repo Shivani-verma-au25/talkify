@@ -13,13 +13,26 @@ export const login = async (loginData) => {
       return resp.data;
       
 }
+// logout
+export const logout = async () => {
+      const resp = await axiosInstance.post('/auth/logout');
+      console.log(resp.data , "log out user");
+      return resp.data;
+      
+}
 
 
 
 export const getAuthUser = async() => {
-      const res = await  axiosInstance.get(`/auth/me`)
-      return res.data;
+      try {
+         const res = await  axiosInstance.get(`/auth/me`)
+            return res.data;   
+      } catch (error) {
+            console.log("error from getauth api", error);
+            
+          return null  
       }
+}
 
 
 export const completeOnboarding =async (userData) => {
