@@ -11,10 +11,11 @@ import  {Toaster} from 'react-hot-toast'
 import PageLoader from './components/PageLoader.jsx'
 import useAuthUser from './hooks/useAuthUser.js'
 import LayOut from './components/LayOut.jsx'
+import { useThemeStore } from './store/useThemeStore.js'
 
 function App() {
 // tanstack query
-   
+const {theme } = useThemeStore()
   const {isLoading , authUser} = useAuthUser()
   const authenticated = Boolean(authUser)
   const isOnboarded = authUser?.isOnBoarded 
@@ -24,7 +25,7 @@ function App() {
   if (isLoading) return <PageLoader/>
 
   return (
-    <>
+    <div className='h-screen ' data-theme={theme}>
     <Routes  >
       <Route path='/' element={ authenticated  && isOnboarded ? (
         <LayOut showSidebar = {true}>
@@ -50,7 +51,7 @@ function App() {
       <Route path='/call' element={authenticated ? <ChatPage /> : <Navigate to={'/login'} />}  />
     </Routes>
     <Toaster />
-    </>
+    </div>
   )
 }
 

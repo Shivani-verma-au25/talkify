@@ -34,7 +34,7 @@ const LoginPage = () => {
   return (
     <div
       className="min-h-screen flex justify-center items-center p-4 sm:p-6 md:p-8"
-      data-theme="coffee"
+      data-theme=""
     >
       <div className="border border-primary/24 flex flex-col lg:flex-row w-full max-w-5xl mx-auto bg-base-100 rounded-xl shadow-lg overflow-hidden">
         {/* login form section  */}

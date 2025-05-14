@@ -6,6 +6,7 @@ import { logout } from '../utils/api'
 import toast from 'react-hot-toast'
 import { BellDotIcon, LogOutIcon, ShipWheelIcon } from 'lucide-react'
 import ThemeSelector from './ThemeSelector'
+import useLogout from '../hooks/useLogout'
 
 function Navbar() {
   const {authUser} = useAuthUser()
@@ -14,10 +15,12 @@ function Navbar() {
 
   const queryClinet = useQueryClient()
 
-  const {mutate :logoutMethod , isPending} = useMutation({
-    mutationFn : logout,
-    onSuccess :() => queryClinet.invalidateQueries({queryKey : ['authUser']})
-  })
+  // const {mutate :logoutMethod , isPending} = useMutation({
+  //   mutationFn : logout,
+  //   onSuccess :() => queryClinet.invalidateQueries({queryKey : ['authUser']})
+  // })
+
+  const {logoutMethod , isPending} = useLogout()
 
   return (
     <nav className='bg-base-200 border-b border-base-300 sticky top-0 z-30 h-16 flex items-center '>
