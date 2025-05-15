@@ -11,7 +11,7 @@ router.route('/friend-request/:id').post(protectRoute,sendFriendRequest)
 router.route('/friend-request/:id/accept').put(protectRoute,acceptFriendRequest)
 
 router.route('/frined-request').get(protectRoute , getFriendRequest)
-router.route('/utgoing-friend-request').get(protectRoute , getOutGoingFreindRequest)
+router.route('/outgoing-friend-request').get(protectRoute , getOutGoingFreindRequest)
 
 
 export default router;

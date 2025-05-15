@@ -36,7 +36,7 @@ const {theme } = useThemeStore()
         )} />
       <Route path='signup/' element={ !authenticated ?  <SignUpPage /> : <Navigate  to={ isOnboarded ? '/' : '/onboarding' } />  } /> 
       <Route path='/login' element={ !authenticated ?  <LoginPage />  : <Navigate to={ isOnboarded ? '/' : '/onboarding' } />} />
-      <Route path='/notificatoion' element={ authenticated ? < NotificationPage/>  : <Navigate to='/login'/>} />
+      <Route path='/notifications' element={ authenticated ? < NotificationPage/>  : <Navigate to='/login'/>} />
       <Route path='/onboarding' element={ authenticated ? 
       (
         !isOnboarded ? (
