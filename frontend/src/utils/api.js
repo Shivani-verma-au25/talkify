@@ -41,7 +41,7 @@ export const completeOnboarding =async (userData) => {
 }      
 
 
-
+// getting user reccomended user frinds or send request to user
 export const getFriends = async () => {
       const response = await axiosInstance.get('/user/friends')
       return response.data;
@@ -59,5 +59,17 @@ export const sendFriendReq = async (userId) => {
       return response.data;
 }
 
+
+
+// accepting request ,notifications 
+
+export const getFriendRequest = async () => {
+      const response = await axiosInstance.get('/user/frined-request')
+      return response.data;
+}
+export const acceptFriendRequest = async (requestId) => {
+      const response = await axiosInstance.put(`/user/friend-request/${requestId}/accept`)
+      return response.data;
+}
 
 

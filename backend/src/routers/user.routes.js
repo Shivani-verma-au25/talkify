@@ -7,10 +7,13 @@ const router = Router()
 router.route('/').get(protectRoute,getRecommendedUsers)
 router.route('/friends').get(protectRoute,getMyFriends)
 
+// sending request
 router.route('/friend-request/:id').post(protectRoute,sendFriendRequest)
 router.route('/friend-request/:id/accept').put(protectRoute,acceptFriendRequest)
 
+// getting frind request
 router.route('/frined-request').get(protectRoute , getFriendRequest)
+
 router.route('/outgoing-friend-request').get(protectRoute , getOutGoingFreindRequest)
 
 
