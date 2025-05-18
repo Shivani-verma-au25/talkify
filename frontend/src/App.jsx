@@ -53,7 +53,13 @@ const {theme } = useThemeStore()
       ) : (
         <Navigate to={'/login'} />
       ) } />
-      <Route path='/chat' element={ authenticated ? <ChatPage /> : <Navigate to='/login'/>} />
+      <Route path='/chat/:id' element={ authenticated && isOnboarded ? (
+        <LayOut showSidebar={true}>
+          <ChatPage />
+        </LayOut>
+      ) : (
+        <Navigate to={!authenticated ?'/login' : '/onboarding' } />
+      )} />
       <Route path='/call' element={authenticated ? <ChatPage /> : <Navigate to={'/login'} />}  />
     </Routes>
     <Toaster />

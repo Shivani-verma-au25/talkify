@@ -73,3 +73,20 @@ export const acceptFriendRequest = async (requestId) => {
 }
 
 
+
+// stream token
+
+export const getStreamToken = async() => {
+      const response = await axiosInstance.get('/chat/token')
+      console.log(response.data,"from api");
+      return response.data;
+      
+}
+
+// export const getStreamToken = async () => {
+//   const res = await axiosInstance.get('/chat/token');
+//   console.log("Axios Response:", res);        // Full Axios response
+//   console.log("Token Data:", res.data.token); // Should log actual token
+//   return res.data; // ✅ This is critical
+// };
+
