@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import useAuthUser from '../hooks/useAuthUser';
 import { useQuery } from '@tanstack/react-query';
 import { getStreamToken } from '../utils/api';
@@ -12,6 +12,7 @@ import CallButton from '../components/CallButton';
 function ChatPage() {
   const {id:targetUserID} = useParams()
   // console.log(targetUserID);
+  const navigate = useNavigate()
   
 
   const [chatClient ,setChatClient] = useState(null)
@@ -19,6 +20,7 @@ function ChatPage() {
   const [loading ,setLoading] = useState(true)
 
   const {authUser} = useAuthUser()
+  
   const {data:tokenData} = useQuery({
     queryKey : ['streamToken'],
     queryFn : getStreamToken,
@@ -28,7 +30,7 @@ function ChatPage() {
   useEffect(() => {
     console.log("Token Data:", tokenData);
     const initChat  = async () =>{
-      if (!tokenData?.token || !authUser) return 
+      if (!tokenData?.token || !authUser) return ;
 
       try {
         console.log("Initializing the Stream chat client....");
@@ -39,7 +41,7 @@ function ChatPage() {
           id : authUser._id,
           name : authUser.fullname,
           image : authUser.profilePic
-        },tokenData.token)
+        },tokenData.token);
 
       // sort chat ides
       const channelId = [authUser._id ,targetUserID].sort().join("-"); 
@@ -67,11 +69,14 @@ function ChatPage() {
   // video call handler
   const handleVideoCall =() => {
     if (channel) {
+      // const callUrl = `${window.location.origin}/call/${channel.id}`
       const callUrl = `${window.location.origin}/call/${channel.id}`
+      // console.log("call url" ,callUrl);
+      
       channel.sendMessage({
         text : `I've started a video call. Join me here : ${callUrl}`
       })
-      toast.success("Video call link send successfully!")
+      toast.success("Video call link send successfully!")  
     }
   }
   

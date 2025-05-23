@@ -29,6 +29,7 @@ const LoginPage = () => {
   const hanldeLoginMethod = (e) => {
     e.preventDefault();
     loginMutation(loginData);
+    toast.success("Login successful!")
   };
 
   return (

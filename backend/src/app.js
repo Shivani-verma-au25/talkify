@@ -22,9 +22,11 @@ app.use(cookieParser())
 import authRouter from './routers/auth.routes.js'
 import userRouter from './routers/user.routes.js'
 import chatRouter from './routers/chat.routes.js'
+// import callRouter from './routers/call.routes.js'
 
 app.use('/api/auth' ,authRouter)
 app.use('/api/user' ,userRouter)
 app.use('/api/chat' ,chatRouter)
+// app.use('/api/call' ,callRouter)
 
 export {app}

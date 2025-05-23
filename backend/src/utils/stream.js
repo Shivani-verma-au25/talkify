@@ -33,10 +33,6 @@ export const upStreamUser =  async(userData) =>{
 // todo : to it later
 export const genrateStreamToken = async (userID) =>{
     try {
-        // ensure id  is a string
-        // if (!userID) {
-        //     console.log("user id is not there"); 
-        // }
 
         const userid = userID.toString()
         return streamClient.createToken(userid)

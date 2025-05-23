@@ -20,7 +20,7 @@ const {theme } = useThemeStore()
   const authenticated = Boolean(authUser)
   const isOnboarded = authUser?.isOnBoarded 
 
-   console.log(authUser,"authuser");
+  //  console.log(authUser,"authuser");
    
   if (isLoading) return <PageLoader/>
 
@@ -60,8 +60,15 @@ const {theme } = useThemeStore()
       ) : (
         <Navigate to={!authenticated ?'/login' : '/onboarding' } />
       )} />
-      <Route path='/call' element={authenticated ? <ChatPage /> : <Navigate to={'/login'} />}  />
+      <Route path='/call/:id' element={authenticated && isOnboarded ? (
+        <CallPage />
+      ) : (
+        <Navigate to={!authenticated ? '/login' : '/onboarding'} />
+      )}  />
+      <Route path="*" element={<div>404 Not Found</div>} />
+      <Route path="*" element={<div>404 Not Found</div>} />
     </Routes>
+
     <Toaster />
     </div>
   )
